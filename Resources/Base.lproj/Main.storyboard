@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MIz-Jw-B1n">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ApplePayDemo-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController title="ApplePayDemo" id="BYZ-38-t0r" customClass="PaymentViewController" customModule="ApplePayDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ApplePayDemo" id="OMc-NO-qQo"/>
+                    <connections>
+                        <segue destination="D6s-mG-fPC" kind="show" identifier="Confirmation" id="Syu-vg-VBa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="330.39999999999998" y="-362.06896551724139"/>
+        </scene>
+        <!--Confirmation-->
+        <scene sceneID="YzD-28-xaK">
+            <objects>
+                <viewController title="Confirmation" id="D6s-mG-fPC" customClass="ConfirmationViewController" customModule="ApplePayDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ehS-0K-Oo7"/>
+                        <viewControllerLayoutGuide type="bottom" id="jB8-gr-t26"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zyN-qf-KKI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RFp-O0-6q5">
+                                <rect key="frame" x="20" y="72" width="335" height="587"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RFp-O0-6q5" firstAttribute="leading" secondItem="zyN-qf-KKI" secondAttribute="leading" constant="20" symbolic="YES" id="9Sd-cL-M2V"/>
+                            <constraint firstAttribute="trailing" secondItem="RFp-O0-6q5" secondAttribute="trailing" constant="20" symbolic="YES" id="S6p-2s-UFF"/>
+                            <constraint firstItem="RFp-O0-6q5" firstAttribute="top" secondItem="ehS-0K-Oo7" secondAttribute="bottom" constant="8" symbolic="YES" id="SGI-bB-6bK"/>
+                            <constraint firstItem="jB8-gr-t26" firstAttribute="top" secondItem="RFp-O0-6q5" secondAttribute="bottom" constant="8" symbolic="YES" id="Yv3-kx-P8C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentTextView" destination="RFp-O0-6q5" id="MFj-f2-7e1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="86F-yY-QKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1189.5999999999999" y="-362.06896551724139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D5e-De-unq">
+            <objects>
+                <navigationController id="MIz-Jw-B1n" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dJG-SE-Oqe">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tjX-wI-DYb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LsY-73-OGp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537.84153863811264" y="-361.99256326786741"/>
+        </scene>
+    </scenes>
+</document>

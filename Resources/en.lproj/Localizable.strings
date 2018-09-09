@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  ApplePayDemo
+
+  Created by Min Wu on 09/09/2018.
+  Copyright © 2018 Sample Code. All rights reserved.
+*/
+
+"InvalidNameDescription" = "Missing first name and last name";
+"InvalidEmailDescription" = "Invalid email";
+"InvalidPhoneNumberDescription" = "Missing phone number";
+
+"MissingAddressDescription" = "Missing address information";
+"MissingStreetDescription" = "Missing street name";
+"MissingCityDescription" = "Missing city name";
+"MissingPostalcodeDescription" = "Missing postal code";
+"MissingCountryDescription" = "Missing country name";
+
+"TokenUnavailableDescription" = "Service unavailable";
