@@ -43,7 +43,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0169AFD01CFF91E5009C2C2B /* libswiftContacts.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftContacts.dylib; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/System/Library/PrivateFrameworks/Swift/libswiftContacts.dylib; sourceTree = DEVELOPER_DIR; };
 		0180587F1CF3E31400C107BF /* ApplePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018058821CF3E31400C107BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018058841CF3E31400C107BF /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -104,7 +103,6 @@
 		01819BE01CFF812800FCA0E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0169AFD01CFF91E5009C2C2B /* libswiftContacts.dylib */,
 				01819BE11CFF812800FCA0E5 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -395,7 +393,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cellpointmobile.ceptor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cellpointmobile.applePayDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -410,7 +408,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cellpointmobile.ceptor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cellpointmobile.applePayDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
