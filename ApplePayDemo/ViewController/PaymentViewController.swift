@@ -64,6 +64,10 @@ class PaymentViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self?.present(alert, animated: true, completion: nil)
                 errors.forEach {print($0.localizedDescription)}
+            case .cancel:
+                let alert = UIAlertController(title: nil, message: "Payment is cancel", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
             }
         }
     }

@@ -14,6 +14,8 @@ enum PaymentResult {
     case success(PKPaymentToken)
 
     case failure([Error])
+
+    case cancel
 }
 
 typealias PaymentCompletionHandler = (PaymentResult) -> Void
@@ -28,7 +30,7 @@ class PaymentHandler: NSObject {
     ]
 
     // Payment request
-    private var paymentSummaryItems = [PKPaymentSummaryItem]()
+    private var paymentSummaryItems: [PKPaymentSummaryItem] = []
     private var requiredBillingContactFields: Set<PKContactField> = []
     private var requiredShippingContactFields: Set<PKContactField> = []
     private var completionHandler: PaymentCompletionHandler?
@@ -37,6 +39,7 @@ class PaymentHandler: NSObject {
     private var paymentController: PKPaymentAuthorizationController?
     private var paymentAuthorizationResult: PKPaymentAuthorizationResult = PKPaymentAuthorizationResult(status: .failure, errors: nil)
     private var paymentToken: PKPaymentToken?
+    private var didAuthorizePayment = false
 
     static func applePayStatus() -> (canMakePayments: Bool, canSetupCards: Bool) {
         return (PKPaymentAuthorizationController.canMakePayments(),
@@ -67,6 +70,16 @@ class PaymentHandler: NSObject {
             }
         }
     }
+
+    private func resetPaymentState() {
+        paymentSummaryItems = []
+        requiredBillingContactFields = []
+        requiredShippingContactFields = []
+        completionHandler = nil
+        paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .failure, errors: nil)
+        paymentToken = nil
+        didAuthorizePayment = false
+    }
 }
 
 // PKPaymentAuthorizationControllerDelegate conformance (iOS 11+).
@@ -77,6 +90,7 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
                                         handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
 
         paymentToken = payment.token
+        didAuthorizePayment = true
 
         let billingValidationResult = PaymentContactValidation.performContactValidation(payment: payment,
                                                                                         type: .billing,
@@ -111,15 +125,17 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
 
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
         DispatchQueue.main.async { [weak self] in
-            if self?.paymentAuthorizationResult.status == .success, let token = self?.paymentToken {
+            if self?.didAuthorizePayment == false {
+                self?.completionHandler?(PaymentResult.cancel)
+            } else if self?.paymentAuthorizationResult.status == .success, let token = self?.paymentToken {
                 self?.completionHandler?(PaymentResult.success(token))
             } else {
                 let errors = self?.paymentAuthorizationResult.errors ?? [Error]()
                 self?.completionHandler?(PaymentResult.failure(errors))
             }
-            self?.completionHandler = nil
+            self?.resetPaymentState()
+            controller.dismiss {}
         }
-        controller.dismiss {}
     }
 }
 
