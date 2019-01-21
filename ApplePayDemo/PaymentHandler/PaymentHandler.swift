@@ -11,7 +11,7 @@ import PassKit
 
 enum PaymentResult {
 
-    case success(PKPaymentToken)
+    case success(PKPayment)
 
     case failure([Error])
 
@@ -38,7 +38,7 @@ class PaymentHandler: NSObject {
     // Private payment state
     private var paymentController: PKPaymentAuthorizationController?
     private var paymentAuthorizationResult: PKPaymentAuthorizationResult = PKPaymentAuthorizationResult(status: .failure, errors: nil)
-    private var paymentToken: PKPaymentToken?
+    private var payment: PKPayment?
     private var didAuthorizePayment = false
 
     static func applePayStatus() -> (canMakePayments: Bool, canSetupCards: Bool) {
@@ -77,7 +77,7 @@ class PaymentHandler: NSObject {
         requiredShippingContactFields = []
         completionHandler = nil
         paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .failure, errors: nil)
-        paymentToken = nil
+        payment = nil
         didAuthorizePayment = false
     }
 }
@@ -89,7 +89,7 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
                                         didAuthorizePayment payment: PKPayment,
                                         handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
 
-        paymentToken = payment.token
+        self.payment = payment
         didAuthorizePayment = true
 
         let billingValidationResult = PaymentContactValidation.performContactValidation(payment: payment,
@@ -127,8 +127,8 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             if self?.didAuthorizePayment == false {
                 self?.completionHandler?(PaymentResult.cancel)
-            } else if self?.paymentAuthorizationResult.status == .success, let token = self?.paymentToken {
-                self?.completionHandler?(PaymentResult.success(token))
+            } else if self?.paymentAuthorizationResult.status == .success, let payment = self?.payment {
+                self?.completionHandler?(PaymentResult.success(payment))
             } else {
                 let errors = self?.paymentAuthorizationResult.errors ?? [Error]()
                 self?.completionHandler?(PaymentResult.failure(errors))

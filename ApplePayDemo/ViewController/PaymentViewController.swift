@@ -56,8 +56,8 @@ class PaymentViewController: UIViewController {
 
         paymentHandler.startPayment(paymentRequest) { [weak self] result in
             switch result {
-            case.success(let token):
-                self?.performSegue(withIdentifier: "Confirmation", sender: token)
+            case.success(let payment):
+                self?.performSegue(withIdentifier: "Confirmation", sender: payment)
             case.failure(let errors):
                 let messege = errors.map {$0.localizedDescription}.joined(separator: "\n")
                 let alert = UIAlertController(title: "Billing Address", message: messege, preferredStyle: .alert)
@@ -79,7 +79,7 @@ class PaymentViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let confirmationVC = segue.destination as? ConfirmationViewController {
-            confirmationVC.token = sender as? PKPaymentToken
+            confirmationVC.payment = sender as? PKPayment
         }
     }
 }

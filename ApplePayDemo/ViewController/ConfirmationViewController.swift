@@ -13,7 +13,7 @@ class ConfirmationViewController: UIViewController {
 
     @IBOutlet private weak var contentTextView: UITextView!
 
-    var token: PKPaymentToken?
+    var payment: PKPayment?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +21,8 @@ class ConfirmationViewController: UIViewController {
     }
 
     private func displayToken() {
-        self.title = token?.paymentMethod.displayName
-        guard let paymentData = token?.paymentData else {return}
+        self.title = payment?.token.paymentMethod.displayName
+        guard let paymentData = payment?.token.paymentData else {return}
         let tokenString = String(data: paymentData, encoding: .utf8)
         contentTextView.text = tokenString
     }
