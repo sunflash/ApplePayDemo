@@ -33,7 +33,7 @@ struct PaymentContactValidation {
 
         let invalidEmailDescription = NSLocalizedString("InvalidEmailDescription", comment: "PaymentContactError")
 
-        guard let emailString = email, emailString.isValidEmail == false else {
+        guard let emailString = email, emailString.isValidEmail == true else {
             let contactEmailError = PKPaymentRequest.paymentContactInvalidError(withContactField: .emailAddress, localizedDescription: invalidEmailDescription)
             return contactEmailError
         }
