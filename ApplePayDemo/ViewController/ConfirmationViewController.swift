@@ -25,5 +25,11 @@ class ConfirmationViewController: UIViewController {
         guard let paymentData = payment?.token.paymentData else {return}
         let tokenString = String(data: paymentData, encoding: .utf8)
         contentTextView.text = tokenString
+
+        print("BillingContact")
+        print(payment?.billingContact?.postalAddress ?? "")
+        print("ShippingContact")
+        print(payment?.shippingContact?.emailAddress ?? "")
+        print(payment?.shippingContact?.phoneNumber ?? "")
     }
 }
